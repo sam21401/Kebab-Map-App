@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">KebabApp</string>
+    <string name="welcome_text">Welcome To Kebab Places in Legnica</string>
+    <string name="login_button_text">Log In</string>
+    <string name="no_login_button_text">Continue Without Log In</string>
+    <string name="kebabapplogo">KebabAppLogo</string>
+</resources>
