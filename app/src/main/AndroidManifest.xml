@@ -13,6 +13,13 @@
         android:theme="@style/Theme.KebabApp"
         tools:targetApi="31">
         <activity
+            android:name=".KebabMapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MapActivity"
+            android:exported="false"
+            android:theme="@style/Theme.KebabApp" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
@@ -23,6 +30,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_KEY}"  />
     </application>
 
 </manifest>

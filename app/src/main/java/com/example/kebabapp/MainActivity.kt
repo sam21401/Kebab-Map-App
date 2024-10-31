@@ -1,6 +1,8 @@
 package com.example.kebabapp
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -18,6 +20,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+        val continueButton = findViewById<Button>(R.id.buttonContinue)
+        continueButton.setOnClickListener{
+            val intent = Intent(this,KebabMapActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
 
