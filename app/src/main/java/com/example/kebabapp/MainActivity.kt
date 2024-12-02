@@ -1,38 +1,42 @@
 package com.example.kebabapp
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.kebabapp.ui.theme.KebabAppTheme
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.example.kebabapp.databinding.ActivityMainBinding
+import com.example.kebabapp.utilities.ReadJSONFromAssets
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.Gson
 
-class MainActivity : ComponentActivity() {
+
+class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var kebabPlaces: KebabPlaceViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val navView: BottomNavigationView = binding.navView
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_list, R.id.navigation_map, R.id.navigation_user
+            )
+        )
+        getSupportActionBar()?.hide()
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
+        val jsonString = ReadJSONFromAssets(baseContext,"sampledata.json")
+        val data = Gson().fromJson(jsonString, KebabPlaces::class.java)
+        kebabPlaces = ViewModelProvider(this)[KebabPlaceViewModel::class.java]
+        kebabPlaces.setKebabPlaces(data)
+
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    KebabAppTheme {
-        Greeting("Android")
-    }
-}
