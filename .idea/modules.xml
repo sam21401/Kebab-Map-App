@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/KebabApp.iml" filepath="$PROJECT_DIR$/.idea/modules/KebabApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/KebabApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/KebabApp.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/PZ.KebabApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/PZ.KebabApp.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/PZ.KebabApp.app.androidTest~1.iml" filepath="$PROJECT_DIR$/.idea/modules/app/PZ.KebabApp.app.androidTest~1.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/PZ.KebabApp.app.main~1.iml" filepath="$PROJECT_DIR$/.idea/modules/app/PZ.KebabApp.app.main~1.iml" />

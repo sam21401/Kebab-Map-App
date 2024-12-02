@@ -1,17 +1,21 @@
 package com.example.kebabapp
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.kebabapp.databinding.ActivityMainBinding
+import com.example.kebabapp.utilities.ReadJSONFromAssets
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.Gson
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var kebabPlaces: KebabPlaceViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -28,6 +32,11 @@ class MainActivity : AppCompatActivity() {
         getSupportActionBar()?.hide()
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        val jsonString = ReadJSONFromAssets(baseContext,"sampledata.json")
+        val data = Gson().fromJson(jsonString, KebabPlaces::class.java)
+        kebabPlaces = ViewModelProvider(this)[KebabPlaceViewModel::class.java]
+        kebabPlaces.setKebabPlaces(data)
+
     }
 }
 

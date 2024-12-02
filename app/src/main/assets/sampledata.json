@@ -1,0 +1,20 @@
+[
+  {
+    "kebabName": "Piri Piri",
+    "address": "Szkolna 1",
+    "lat": "51.204140",
+    "long": "16.160650"
+  },
+  {
+    "kebabName": "Lara Döner Kebab Legnica",
+    "address": "Wrocławska 13",
+    "lat": "51.209501",
+    "long": "16.167769"
+  },
+  {
+    "kebabName": "Had Food",
+    "address": "Fabryczna 13",
+    "lat": "51.206648",
+    "long": "16.178690"
+  }
+]
