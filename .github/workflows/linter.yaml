@@ -31,3 +31,8 @@ jobs:
         env:
           # To report GitHub Actions status checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload linter results as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: linter-results
+          path: super-linter.report
