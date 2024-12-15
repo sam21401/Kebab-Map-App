@@ -26,7 +26,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'temurin'
+          distribution: 'temurin'  # Use 'temurin' for Adoptium JDK
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v3
@@ -38,7 +38,10 @@ jobs:
 
       - name: Install KtLint
         run: |
-          curl -sS https://github.com/pinterest/ktlint/releases/download/0.50.0/ktlint && chmod +x ktlint && sudo mv ktlint /usr/local/bin/ktlint
+          curl -sSLo ktlint https://github.com/pinterest/ktlint/releases/download/0.50.0/ktlint
+          if [ ! -f ktlint ]; then echo "KtLint download failed"; exit 1; fi
+          chmod +x ktlint
+          sudo mv ktlint /usr/local/bin/ktlint
 
       - name: Run KtLint check
         run: ktlint --android --format
