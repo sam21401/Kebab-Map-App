@@ -4,5 +4,5 @@ data class KebabPlaceItem(
     val address: String,
     val kebabName: String,
     val lat: Double,
-    val long: Double
+    val long: Double,
 )
