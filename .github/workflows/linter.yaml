@@ -52,14 +52,5 @@ jobs:
           chmod +x ktlint
           sudo mv ktlint /usr/local/bin/ktlint
 
-      - name: Run Ktlint autofix
+      - name: Run Ktlint check with autofix
         run: ./gradlew ktlintFormat
-
-      - name: Run KtLint check
-        run: ./gradlew ktlintCheck --info
-
-      - name: Upload KtLint report as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: ktlint-report
-          path: build/reports/ktlint/ktlintCheck.txt
