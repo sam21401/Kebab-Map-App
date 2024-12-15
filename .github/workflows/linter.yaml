@@ -1,38 +1,50 @@
----
 name: Lint
 
-on: # yamllint disable-line rule:truthy
-  push: null
-  pull_request: null
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
-permissions: {}
+permissions:
+  contents: read
+  packages: read
+  statuses: write
 
 jobs:
-  build:
-    name: Lint
+  ktlint:
+    name: Run KtLint
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-      packages: read
-      # To report GitHub Actions status checks
-      statuses: write
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          # super-linter needs the full git history to get the
-          # list of files that changed across commits
-          fetch-depth: 0
 
-      - name: Super-linter
-        uses: super-linter/super-linter@v7.2.1 # x-release-please-version
-        env:
-          # To report GitHub Actions status checks
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Upload linter results as artifact
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'adoptopenjdk'
+
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Install KtLint
+        run: |
+          curl -sS https://github.com/pinterest/ktlint/releases/download/0.50.0/ktlint && chmod +x ktlint && sudo mv ktlint /usr/local/bin/ktlint
+
+      - name: Run KtLint check
+        run: ktlint --android --format
+
+      - name: Upload KtLint report as artifact
         uses: actions/upload-artifact@v3
         with:
-          name: linter-results
-          path: super-linter.report
+          name: ktlint-report
+          path: build/reports/ktlint/ktlintCheck.txt
