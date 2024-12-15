@@ -2,11 +2,13 @@ package com.example.kebabapp.utilities
 
 import android.content.Context
 import android.util.Log
-
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-fun ReadJSONFromAssets(context: Context, path: String): String {
+fun readJSONFromAssets(
+    context: Context,
+    path: String,
+): String {
     val identifier = "[ReadJSON]"
     try {
         val file = context.assets.open("$path")
