@@ -39,6 +39,10 @@ jobs:
       - name: Set up Gradle
         uses: gradle/wrapper-validation-action@v1
 
+      - name: Add permissions to Gradle
+        run: chmod +x gradlew
+
+
       - name: Install KtLint
         run: |
           curl -sSLo ktlint https://github.com/pinterest/ktlint/releases/download/0.50.0/ktlint
