@@ -3,10 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/kebabMapFragment">
+    app:startDestination="@id/navigation_map">
     <fragment
-        android:id="@+id/kebabMapFragment"
+        android:id="@+id/navigation_map"
         android:name="com.example.kebabapp.fragments.kebabmap.KebabMapFragment"
         android:label="fragment_kebab_map"
         tools:layout="@layout/fragment_kebab_map" />
+    <fragment
+        android:id="@+id/navigation_list"
+        android:name="com.example.kebabapp.fragments.kebablist.KebabListFragment"
+        android:label="fragment_kebab_list"
+        tools:layout="@layout/fragment_kebab_list" />
+    <fragment
+        android:id="@+id/navigation_user"
+        android:name="com.example.kebabapp.fragments.user.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_kebab_list" />
 </navigation>
