@@ -20,11 +20,12 @@
         app:navGraph="@navigation/nav_graph"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_height="60dp"
-        android:layout_width="match_parent"
         android:id="@+id/bottomNavigation"
-        app:layout_constraintTop_toBottomOf="@id/nav_host_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/orange"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nav_host_fragment"
         app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
