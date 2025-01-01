@@ -16,5 +16,47 @@
     "address": "Fabryczna 13",
     "lat": "51.206648",
     "long": "16.178690"
+  },
+  {
+    "kebabName": "Max Kebab",
+    "address": "aleja Piłsudskiego 84",
+    "lat": "51.201287",
+    "long":"16.214685"
+  },
+  {
+    "kebabName": "Hallo Kebab",
+    "address": "Stefana Czarnieckiego 19c",
+    "lat": "51.211700",
+    "long": "16.175225"
+  },
+  {
+    "kebabName": "Piri Piri",
+    "address": "Szkolna 1",
+    "lat": "51.204140",
+    "long": "16.160650"
+  },
+  {
+    "kebabName": "Lara Döner Kebab Legnica",
+    "address": "Wrocławska 13",
+    "lat": "51.209501",
+    "long": "16.167769"
+  },
+  {
+    "kebabName": "Had Food",
+    "address": "Fabryczna 13",
+    "lat": "51.206648",
+    "long": "16.178690"
+  },
+  {
+    "kebabName": "Max Kebab",
+    "address": "aleja Piłsudskiego 84",
+    "lat": "51.201287",
+    "long":"16.214685"
+  },
+  {
+    "kebabName": "Hallo Kebab",
+    "address": "Stefana Czarnieckiego 19c",
+    "lat": "51.211700",
+    "long": "16.175225"
   }
 ]

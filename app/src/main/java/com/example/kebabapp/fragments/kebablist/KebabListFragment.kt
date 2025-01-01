@@ -5,15 +5,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.kebabapp.KebabPlaceViewModel
+import com.example.kebabapp.KebabPlaces
 import com.example.kebabapp.R
+import com.example.kebabapp.R.id.recyclerView
+import com.google.android.gms.maps.SupportMapFragment
 
 class KebabListFragment : Fragment() {
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var dataList: KebabPlaces
+    lateinit var namesList: Array<String>
+    lateinit var addressList: Array<String>
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_kebab_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_kebab_list, container, false)
+       recyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.setHasFixedSize(true)
+        getData()
+        return view
+    }
+    private fun getData(){
+        val kebabViewModel = ViewModelProvider(requireActivity()).get(KebabPlaceViewModel::class.java)
+        recyclerView.adapter = AdapterClass(kebabViewModel.getKebabPlaces())
     }
 }
