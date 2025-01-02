@@ -5,4 +5,5 @@ data class KebabPlaceItem(
     val kebabName: String,
     val lat: Double,
     val long: Double,
+    val openingYear: Int
 )

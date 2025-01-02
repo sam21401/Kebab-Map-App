@@ -12,6 +12,8 @@ class AdapterClass(private val dataList: KebabPlaces): RecyclerView.Adapter<Adap
     class ViewHolderClass(itemView: View): RecyclerView.ViewHolder(itemView) {
         val rvName:TextView = itemView.findViewById(R.id.kebab_name)
         val rvAddress:TextView = itemView.findViewById(R.id.kebab_address)
+        val rvOpeningYear:TextView = itemView.findViewById(R.id.kebab_opening_year)
+        val rvLatLng:TextView = itemView.findViewById(R.id.kebab_latlng)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
@@ -27,6 +29,7 @@ class AdapterClass(private val dataList: KebabPlaces): RecyclerView.Adapter<Adap
         val currentItem = dataList[position]
         holder.rvName.text = currentItem.kebabName
         holder.rvAddress.text = currentItem.address
-
+        holder.rvLatLng.text = "N: "+currentItem.lat+" E: "+currentItem.long
+        holder.rvOpeningYear.text = currentItem.openingYear.toString()
     }
 }

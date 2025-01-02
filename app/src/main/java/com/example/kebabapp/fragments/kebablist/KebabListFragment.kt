@@ -9,18 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kebabapp.KebabPlaceViewModel
-import com.example.kebabapp.KebabPlaces
 import com.example.kebabapp.R
-import com.example.kebabapp.R.id.recyclerView
-import com.google.android.gms.maps.SupportMapFragment
+
 
 class KebabListFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var dataList: KebabPlaces
-    lateinit var namesList: Array<String>
-    lateinit var addressList: Array<String>
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
