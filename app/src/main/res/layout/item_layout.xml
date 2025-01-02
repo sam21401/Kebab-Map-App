@@ -22,7 +22,8 @@
             android:scaleType="fitXY"
             android:src="@drawable/ic_kebab_marker"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/kebab_logo"/>
 
         <TextView
             android:id="@+id/kebab_name"
