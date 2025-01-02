@@ -28,7 +28,7 @@ class KebabMapFragment : Fragment() {
             val legnicaCity = LatLng(51.2070, 16.1753)
             val kebabViewModel = ViewModelProvider(requireActivity()).get(KebabPlaceViewModel::class.java)
             Log.i("XDDDDDDDD", kebabViewModel.getKebabPlaces().toString())
-            var listOfMarkers = createListOfMarkers(kebabViewModel.getKebabPlaces())
+            val listOfMarkers = createListOfMarkers(kebabViewModel.getKebabPlaces())
             for (e in listOfMarkers) {
                 googleMap.addMarker(e)
             }
@@ -64,9 +64,9 @@ class KebabMapFragment : Fragment() {
     }
 
     private fun createListOfMarkers(kebabPlaces: KebabPlaces): MutableList<MarkerOptions> {
-        var listOfMarkers: MutableList<MarkerOptions> = mutableListOf()
+        val listOfMarkers: MutableList<MarkerOptions> = mutableListOf()
         for (item in kebabPlaces) {
-            var markerOptions = MarkerOptions()
+            val markerOptions = MarkerOptions()
             markerOptions.title(item.kebabName)
             markerOptions.snippet(item.address)
             markerOptions.position(LatLng(item.lat, item.long))
