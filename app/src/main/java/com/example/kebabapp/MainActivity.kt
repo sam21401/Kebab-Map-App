@@ -3,9 +3,7 @@ package com.example.kebabapp
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.kebabapp.databinding.ActivityMainBinding
 import com.example.kebabapp.utilities.readJSONFromAssets
@@ -20,21 +18,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val navView: BottomNavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration =
-            AppBarConfiguration(
-                setOf(
-                    R.id.navigation_list,
-                    R.id.navigation_map,
-                    R.id.navigation_user,
-                ),
-            )
-        getSupportActionBar()?.hide()
-        setupActionBarWithNavController(navController, appBarConfiguration)
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        val navView: BottomNavigationView = findViewById(R.id.bottomNavigation)
         navView.setupWithNavController(navController)
+
         val jsonString = readJSONFromAssets(baseContext, "sampledata.json")
         val data = Gson().fromJson(jsonString, KebabPlaces::class.java)
         kebabPlaces = ViewModelProvider(this)[KebabPlaceViewModel::class.java]
