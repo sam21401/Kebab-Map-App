@@ -26,19 +26,12 @@ class KebabMapFragment : Fragment() {
         OnMapReadyCallback { googleMap ->
 
             val legnicaCity = LatLng(51.2070, 16.1753)
-            val exampleKebabLatLng = LatLng(51.204137, 16.160657)
             val kebabViewModel = ViewModelProvider(requireActivity()).get(KebabPlaceViewModel::class.java)
             Log.i("XDDDDDDDD", kebabViewModel.getKebabPlaces().toString())
-        /*val markerOptionKebab = MarkerOptions()
-        markerOptionKebab.position(ExampleKebabLatLng)
-        markerOptionKebab.title("Piri-Piri")
-        markerOptionKebab.snippet("Craft Kebab!")
-        markerOptionKebab.icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromDrawable(R.drawable.ic_kebab_marker)))*/
-            var listOfMarkers = createListOfMarkers(kebabViewModel.getKebabPlaces())
+            val listOfMarkers = createListOfMarkers(kebabViewModel.getKebabPlaces())
             for (e in listOfMarkers) {
                 googleMap.addMarker(e)
             }
-            // googleMap.addMarker(markerOptionKebab)
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(legnicaCity, 14f))
             googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.map_style_basic))
         }
@@ -71,9 +64,9 @@ class KebabMapFragment : Fragment() {
     }
 
     private fun createListOfMarkers(kebabPlaces: KebabPlaces): MutableList<MarkerOptions> {
-        var listOfMarkers: MutableList<MarkerOptions> = mutableListOf()
+        val listOfMarkers: MutableList<MarkerOptions> = mutableListOf()
         for (item in kebabPlaces) {
-            var markerOptions = MarkerOptions()
+            val markerOptions = MarkerOptions()
             markerOptions.title(item.kebabName)
             markerOptions.snippet(item.address)
             markerOptions.position(LatLng(item.lat, item.long))
