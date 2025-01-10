@@ -5,14 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.kebabapp.R
+import com.example.kebabapp.databinding.FragmentUserLoginBinding
 
-class UserFragment : Fragment() {
+class UserLoginFragment : Fragment() {
+    private lateinit var binding: FragmentUserLoginBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.fragment_user_register, container, false)
+        super.onCreate(savedInstanceState)
+        binding = FragmentUserLoginBinding.inflate(layoutInflater)
+
+        return binding.root
     }
 }

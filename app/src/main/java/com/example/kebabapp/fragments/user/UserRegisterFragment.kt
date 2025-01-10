@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.kebabapp.R
 
-class UserFragment : Fragment() {
+class UserRegisterFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.fragment_user_register, container, false)
+        return inflater.inflate(R.layout.fragment_user_login, container, false)
     }
 }
