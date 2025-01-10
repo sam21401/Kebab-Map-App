@@ -56,4 +56,5 @@
     <string name="register_message">Register yourself</string>
     <string name="register">REGISTER</string>
     <string name="name">Name</string>
+    <string name="hello">"Hello, "</string>
 </resources>
