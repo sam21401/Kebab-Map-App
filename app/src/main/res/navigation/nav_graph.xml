@@ -17,6 +17,5 @@
     <fragment
         android:id="@+id/navigation_user"
         android:name="com.example.kebabapp.fragments.user.UserFragment"
-        android:label="fragment_user"
-        tools:layout="@layout/fragment_kebab_list" />
+        android:label="fragment_user" />
 </navigation>
