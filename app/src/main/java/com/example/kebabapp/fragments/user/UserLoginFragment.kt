@@ -11,6 +11,7 @@ import com.example.kebabapp.databinding.FragmentUserLoginBinding
 
 class UserLoginFragment : Fragment() {
     private lateinit var binding: FragmentUserLoginBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -18,10 +19,10 @@ class UserLoginFragment : Fragment() {
     ): View? {
         super.onCreate(savedInstanceState)
         binding = FragmentUserLoginBinding.inflate(layoutInflater)
-        binding.btnLogin.setOnClickListener{
+        binding.btnLogin.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_user_logging_to_navigation_user)
         }
-        binding.tvRegister.setOnClickListener{
+        binding.tvRegister.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_user_logging_to_navigation_user_register)
         }
 

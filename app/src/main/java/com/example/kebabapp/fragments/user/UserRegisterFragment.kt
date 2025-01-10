@@ -11,6 +11,7 @@ import com.example.kebabapp.databinding.FragmentUserRegisterBinding
 
 class UserRegisterFragment : Fragment() {
     private lateinit var binding: FragmentUserRegisterBinding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
