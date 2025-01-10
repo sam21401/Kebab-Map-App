@@ -17,7 +17,11 @@
     <fragment
         android:id="@+id/navigation_user"
         android:name="com.example.kebabapp.fragments.user.UserFragment"
-        android:label="fragment_user" />
+        android:label="fragment_user" >
+        <action
+            android:id="@+id/action_navigation_user_to_navigation_user_logging"
+            app:destination="@id/navigation_user_logging" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_user_logging"
         android:name="com.example.kebabapp.fragments.user.UserLoginFragment"
