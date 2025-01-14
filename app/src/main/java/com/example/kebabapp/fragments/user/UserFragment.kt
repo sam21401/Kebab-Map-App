@@ -32,6 +32,9 @@ class UserFragment : Fragment() {
         val userService = RetrofitClient.retrofit.create(UserService::class.java)
         val sharedPreferencesManager = context?.let { SharedPreferencesManager(it) }
         val isLogged = sharedPreferencesManager?.checkStatus()
+        if (sharedPreferencesManager?.getName()?.isNotEmpty() == true) {
+            binding.tvUserLoggedName.text = sharedPreferencesManager.getName().toString()
+        }
         if (!isLogged!!) {
             Log.i("TOKEN", "User is not logged")
             viewLifecycleOwner.lifecycleScope.launchWhenResumed {
@@ -39,12 +42,15 @@ class UserFragment : Fragment() {
             }
             return binding.root
         }
-        viewLifecycleOwner.lifecycleScope.launch {
-            val userName = getUserName(userService)
-            if (!userName.isNullOrEmpty()) {
-                binding.tvUserLoggedName.text = userName // Assuming you have a TextView for the username
-            } else {
-                binding.tvUserLoggedName.text = "Failed to load username"
+        if (isLogged == true && sharedPreferencesManager.getName().isNullOrEmpty()) {
+            viewLifecycleOwner.lifecycleScope.launch {
+                val userName = getUserName(userService)
+                if (!userName.isNullOrEmpty()) {
+                    binding.tvUserLoggedName.text = userName
+                    sharedPreferencesManager.saveName(userName)
+                } else {
+                    binding.tvUserLoggedName.text = "Failed to load username"
+                }
             }
         }
         binding.buttonLogout.setOnClickListener {
@@ -80,7 +86,7 @@ class UserFragment : Fragment() {
 
     private suspend fun getUserName(userService: UserService): String? {
         return try {
-            val response = userService.getProfileInfo() // Assuming this is a suspend function
+            val response = userService.getProfileInfo()
             if (response.isSuccessful) {
                 response.body()?.data?.name
             } else {
