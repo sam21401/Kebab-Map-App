@@ -15,6 +15,7 @@ import com.example.kebabapp.databinding.FragmentUserPanelBinding
 import com.example.kebabapp.utilities.LogoutResponse
 import com.example.kebabapp.utilities.ProfileResponse
 import com.example.kebabapp.utilities.UserService
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,11 +32,7 @@ class UserFragment : Fragment() {
         binding = FragmentUserPanelBinding.inflate(layoutInflater)
         val userService = RetrofitClient.retrofit.create(UserService::class.java)
         val sharedPreferencesManager = context?.let { SharedPreferencesManager(it) }
-        val token = sharedPreferencesManager?.getAuthToken()
-        binding.tvUserLoggedName.text = token.toString()
-        Log.i("TOKEN",token.toString())
         val isLogged = sharedPreferencesManager?.checkStatus()
-        Log.i("TOKEN",isLogged.toString())
         if(!isLogged!!)
         {
             Log.i("TOKEN", "User is not logged")
@@ -43,6 +40,14 @@ class UserFragment : Fragment() {
                 findNavController().navigate(R.id.action_navigation_user_to_navigation_user_logging)
             }
             return binding.root
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            val userName = getUserName(userService)
+            if (!userName.isNullOrEmpty()) {
+                binding.tvUserLoggedName.text = userName // Assuming you have a TextView for the username
+            } else {
+                binding.tvUserLoggedName.text = "Failed to load username"
+            }
         }
         binding.buttonLogout.setOnClickListener {
             sharedPreferencesManager?.clearName()
@@ -58,7 +63,7 @@ class UserFragment : Fragment() {
                         }
                         else
                         {
-                            Log.i("LOGOUT","FAKAP")
+                            Log.i("LOGOUT","Something went wrong ")
                         }
                     }
                     override fun onFailure(p0: Call<LogoutResponse>, p1: Throwable) {
@@ -68,21 +73,18 @@ class UserFragment : Fragment() {
         }
         return binding.root
     }
-    fun getUserName(userService : UserService): String{
-        var name = String()
-        userService.getProfileInfo().enqueue(object : Callback<ProfileResponse>{
-            override fun onResponse(call: Call<ProfileResponse>, response: Response<ProfileResponse>) {
-                if (response.isSuccessful) {
-                    name = response.body()?.data?.name.toString()
-                    Log.e("Profile", "Name: $name")
-                } else {
-                    Log.e("Profile", "Error: ${response.code()} - ${response.message()}")
-                }
+    private suspend fun getUserName(userService: UserService): String? {
+        return try {
+            val response = userService.getProfileInfo() // Assuming this is a suspend function
+            if (response.isSuccessful) {
+                response.body()?.data?.name
+            } else {
+                Log.e("Profile", "Error: ${response.code()} - ${response.message()}")
+                null
             }
-            override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                Log.e("Profile", "Failure: ${t.message}")
-            }
-        })
-        return name
+        } catch (e: Exception) {
+            Log.e("Profile", "Failure: ${e.message}")
+            null
+        }
     }
 }

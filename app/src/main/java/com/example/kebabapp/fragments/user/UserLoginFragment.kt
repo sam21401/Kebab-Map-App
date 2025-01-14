@@ -14,6 +14,7 @@ import com.example.kebabapp.databinding.FragmentUserLoginBinding
 import com.example.kebabapp.utilities.LoginResponse
 import com.example.kebabapp.utilities.ProfileResponse
 import com.example.kebabapp.utilities.UserService
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -41,10 +42,12 @@ class UserLoginFragment : Fragment() {
                         call: Call<LoginResponse>,
                         response: Response<LoginResponse>
                     ) {
+                        Log.i("Public API",call.toString())
                         if (response.isSuccessful) {
                             Log.d("Public API", "Data: ${response.body()}")
                             sharedPreferencesManager?.saveAuthToken(response.body()?.token.toString())
                             sharedPreferencesManager?.login()
+                            Snackbar.make(binding.root, response.body()?.message.toString(), Snackbar.LENGTH_SHORT).show()
                             /*val name = getUserName(userService)
                                 Log.d("Public API","XDDDDDDDDDDDD $name")
                                 sharedPreferencesManager?.saveName(name)*/
@@ -52,6 +55,7 @@ class UserLoginFragment : Fragment() {
                                 findNavController().navigate(R.id.action_navigation_user_logging_to_navigation_user)
                         } else {
                             Log.e("Public API", "Error: ${response.body()?.toString()}")
+                            Snackbar.make(binding.root, response.body()?.message.toString(), Snackbar.LENGTH_SHORT).show()
                         }
                     }
 
