@@ -2,7 +2,6 @@ import android.content.Context
 import android.content.SharedPreferences
 
 class SharedPreferencesManager(context: Context) {
-
     companion object {
         private const val PREF_NAME = "user_prefs"
         private const val KEY_AUTH_TOKEN = "auth_token"
@@ -29,7 +28,8 @@ class SharedPreferencesManager(context: Context) {
         editor.remove(NAME)
         editor.apply()
     }
-    //TOKEN NAME FUNCTIONS
+
+    // TOKEN NAME FUNCTIONS
     fun saveAuthToken(token: String) {
         val editor = sharedPreferences.edit()
         editor.putString(KEY_AUTH_TOKEN, token)
@@ -45,17 +45,20 @@ class SharedPreferencesManager(context: Context) {
         editor.remove(KEY_AUTH_TOKEN)
         editor.apply()
     }
+
     fun login() {
         val editor = sharedPreferences.edit()
-        editor.putBoolean(ISLOGGED,true)
+        editor.putBoolean(ISLOGGED, true)
         editor.apply()
     }
+
     fun checkStatus(): Boolean {
         return sharedPreferences.getBoolean(ISLOGGED, false)
     }
+
     fun logout() {
         val editor = sharedPreferences.edit()
-        editor.putBoolean(ISLOGGED,false)
+        editor.putBoolean(ISLOGGED, false)
         editor.apply()
     }
 }

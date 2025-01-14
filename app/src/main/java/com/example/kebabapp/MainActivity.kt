@@ -26,8 +26,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
         val sharedPreferencesManager = SharedPreferencesManager(this)
         val authToken = sharedPreferencesManager.getAuthToken()
-        if(authToken!=null)
-        {
+        if (authToken != null) {
             RetrofitClient.setAuthToken(authToken)
         }
         val jsonString = readJSONFromAssets(baseContext, "sampledata.json")

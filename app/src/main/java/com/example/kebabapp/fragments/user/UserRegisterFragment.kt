@@ -1,7 +1,7 @@
+
 package com.example.kebabapp.fragments.user
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,31 +30,32 @@ class UserRegisterFragment : Fragment() {
         val email = binding.etUseremail.text
         val password = binding.etPassword.text
         binding.btnRegister.setOnClickListener {
-            if(email!=null && name!=null && password!=null) {
-                Log.i("Public APi","Name"+name+"\nEmail"+email+"\nPassword"+password)
-                userService.registerUser(email = email.toString(),password=password.toString(), name = name.toString()).enqueue(object :
-                    Callback<LoginResponse> {
-                    override fun onResponse(
-                        call: Call<LoginResponse>,
-                        response: Response<LoginResponse>
-                    ) {
-                        if (response.isSuccessful) {
-                            Snackbar.make(binding.root, response.body()?.message.toString(), Snackbar.LENGTH_SHORT).show()
-                            RetrofitClient.setAuthToken(response.body()?.token.toString())
-                            findNavController().navigate(R.id.action_navigation_user_register_to_navigation_user_logging)
-                        } else {
-                            Log.e("Public API", "Error: ${response.body()?.message.toString()}")
+            if (email != null && name != null && password != null) {
+                userService.registerUser(email = email.toString(), password = password.toString(), name = name.toString()).enqueue(
+                    object :
+                        Callback<LoginResponse> {
+                        override fun onResponse(
+                            call: Call<LoginResponse>,
+                            response: Response<LoginResponse>,
+                        ) {
+                            if (response.isSuccessful) {
+                                Snackbar.make(binding.root, response.body()?.message.toString(), Snackbar.LENGTH_SHORT).show()
+                                findNavController().navigate(R.id.action_navigation_user_register_to_navigation_user_logging)
+                            } else {
+                                Snackbar.make(binding.root, response.body()?.message.toString(), Snackbar.LENGTH_SHORT).show()
+                            }
                         }
-                    }
-                    override fun onFailure(p0: Call<LoginResponse>, p1: Throwable) {
-                        Snackbar.make(binding.root, "Something went wrong", Snackbar.LENGTH_SHORT).show()
-                    }
-                })
 
+                        override fun onFailure(
+                            p0: Call<LoginResponse>,
+                            p1: Throwable,
+                        ) {
+                            Snackbar.make(binding.root, "Something went wrong", Snackbar.LENGTH_SHORT).show()
+                        }
+                    },
+                )
+            }
         }
-
-
-    }
         return binding.root
-}
+    }
 }

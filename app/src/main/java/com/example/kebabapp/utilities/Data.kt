@@ -7,5 +7,5 @@ data class Data(
     val id: Int,
     val name: String,
     val role: Int,
-    val updated_at: String
+    val updated_at: String,
 )

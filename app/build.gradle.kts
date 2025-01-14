@@ -1,4 +1,3 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import java.util.Properties
 
 
@@ -33,7 +32,7 @@ android {
         }
         val properties = Properties()
         properties.load(project.rootProject.file("local.properties").inputStream())
-        buildConfigField ("String","API_ADDRESS","\"${properties.getProperty("API_ADDRESS")}\"")
+        buildConfigField("String", "API_ADDRESS", "\"${properties.getProperty("API_ADDRESS")}\"")
     }
 
     buildTypes {
@@ -45,7 +44,6 @@ android {
                 "proguard-rules.pro",
             )
         }
-
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

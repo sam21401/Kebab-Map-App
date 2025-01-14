@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.kebabapp.R
 import com.example.kebabapp.databinding.FragmentUserPanelBinding
 import com.example.kebabapp.utilities.LogoutResponse
-import com.example.kebabapp.utilities.ProfileResponse
 import com.example.kebabapp.utilities.UserService
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -33,8 +32,7 @@ class UserFragment : Fragment() {
         val userService = RetrofitClient.retrofit.create(UserService::class.java)
         val sharedPreferencesManager = context?.let { SharedPreferencesManager(it) }
         val isLogged = sharedPreferencesManager?.checkStatus()
-        if(!isLogged!!)
-        {
+        if (!isLogged!!) {
             Log.i("TOKEN", "User is not logged")
             viewLifecycleOwner.lifecycleScope.launchWhenResumed {
                 findNavController().navigate(R.id.action_navigation_user_to_navigation_user_logging)
@@ -53,26 +51,33 @@ class UserFragment : Fragment() {
             sharedPreferencesManager?.clearName()
             sharedPreferencesManager?.clearAuthToken()
             sharedPreferencesManager?.logout()
-            Log.i("TOKEN",sharedPreferencesManager?.getAuthToken().toString()+" RT\n"+RetrofitClient.getAuthToken().toString())
             findNavController().navigate(R.id.action_navigation_user_to_navigation_user_logging)
-                userService.logoutUser().enqueue(object : Callback<LogoutResponse>{
-                    override fun onResponse(call: Call<LogoutResponse>, response: Response<LogoutResponse>) {
+            userService.logoutUser().enqueue(
+                object : Callback<LogoutResponse> {
+                    override fun onResponse(
+                        call: Call<LogoutResponse>,
+                        response: Response<LogoutResponse>,
+                    ) {
                         if (response.isSuccessful) {
                             RetrofitClient.setAuthToken("")
-                            Log.i("LOGOUT","SUCCESS LOGOUT")
-                        }
-                        else
-                        {
-                            Log.i("LOGOUT","Something went wrong ")
+                            Log.i("LOGOUT", "SUCCESS LOGOUT")
+                        } else {
+                            Log.i("LOGOUT", "Something went wrong ")
                         }
                     }
-                    override fun onFailure(p0: Call<LogoutResponse>, p1: Throwable) {
-                        Log.e("LOGOUT","Error")
+
+                    override fun onFailure(
+                        p0: Call<LogoutResponse>,
+                        p1: Throwable,
+                    ) {
+                        Log.e("LOGOUT", "Error")
                     }
-                })
+                },
+            )
         }
         return binding.root
     }
+
     private suspend fun getUserName(userService: UserService): String? {
         return try {
             val response = userService.getProfileInfo() // Assuming this is a suspend function
