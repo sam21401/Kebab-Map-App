@@ -1,14 +1,24 @@
 package com.example.kebabapp.fragments.kebablist
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kebabapp.KebabPlaces
 import com.example.kebabapp.R
 
-class AdapterClass(private val dataList: KebabPlaces) : RecyclerView.Adapter<AdapterClass.ViewHolderClass>() {
+class AdapterClass(
+    private val dataList: KebabPlaces,
+    private val clickListener: OnLogoClickListener
+) : RecyclerView.Adapter<AdapterClass.ViewHolderClass>() {
+
+    interface OnLogoClickListener {
+        fun onLogoClick(itemId: Int)
+    }
+
     class ViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val rvName: TextView = itemView.findViewById(R.id.kebab_name)
         val rvAddress: TextView = itemView.findViewById(R.id.kebab_address)
@@ -33,14 +43,20 @@ class AdapterClass(private val dataList: KebabPlaces) : RecyclerView.Adapter<Ada
         position: Int,
     ) {
         val currentItem = dataList[position]
-        holder.rvName.text = currentItem.kebabName
+        holder.rvName.text = currentItem.name
         holder.rvAddress.text = currentItem.address
         holder.rvLatLng.text =
             holder.itemView.context.getString(
                 R.string.lat_lng_format,
-                currentItem.lat.toString(),
-                currentItem.long.toString(),
+                currentItem.latitude.toString(),
+                currentItem.longitude.toString(),
             )
-        holder.rvOpeningYear.text = currentItem.openingYear.toString()
+        holder.rvOpeningYear.text = currentItem.year_opened.toString()
+
+        // Handle click on imgLogo
+        holder.rvName.setOnClickListener {
+            Log.i("ADAPTER"," AEEE"+currentItem.id)
+            clickListener.onLogoClick(currentItem.id)
+        }
     }
 }
