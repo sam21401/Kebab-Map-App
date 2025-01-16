@@ -48,4 +48,13 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="signup_message">Sign up to get additional functionalities</string>
+    <string name="email">Email\n</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="create_account_here">Create account here</string>
+    <string name="register_message">Register yourself</string>
+    <string name="register">REGISTER</string>
+    <string name="name">Name</string>
+    <string name="hello">"Hello, "</string>
 </resources>
