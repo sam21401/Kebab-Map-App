@@ -1,5 +1,7 @@
 package com.example.kebabapp
 
+import RetrofitClient
+import SharedPreferencesManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -18,12 +20,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         val navView: BottomNavigationView = findViewById(R.id.bottomNavigation)
         navView.setupWithNavController(navController)
-
+        val sharedPreferencesManager = SharedPreferencesManager(this)
+        val authToken = sharedPreferencesManager.getAuthToken()
+        if (authToken != null) {
+            RetrofitClient.setAuthToken(authToken)
+        }
         val jsonString = readJSONFromAssets(baseContext, "sampledata.json")
         val data = Gson().fromJson(jsonString, KebabPlaces::class.java)
         kebabPlaces = ViewModelProvider(this)[KebabPlaceViewModel::class.java]
