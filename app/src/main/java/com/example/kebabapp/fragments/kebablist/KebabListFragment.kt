@@ -44,7 +44,7 @@ class KebabListFragment : Fragment(), AdapterClass.OnLogoClickListener {
     override fun onLogoClick(itemId: Int) {
         // Set the clicked item's ID in ViewModel
         kebabDetailPageViewModel.setKebabId(itemId)
-        Log.i("ADAPTER",kebabDetailPageViewModel.getKebabId().toString())
+        Log.i("ADAPTER", kebabDetailPageViewModel.getKebabId().toString())
         // Navigate to the detail page (assuming you have a navigation action set up)
         findNavController().navigate(R.id.action_navigation_list_to_navigation_kebab_detail_page)
     }

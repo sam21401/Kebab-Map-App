@@ -1,10 +1,8 @@
 package com.example.kebabapp.fragments.kebablist
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kebabapp.KebabPlaces
@@ -12,9 +10,8 @@ import com.example.kebabapp.R
 
 class AdapterClass(
     private val dataList: KebabPlaces,
-    private val clickListener: OnLogoClickListener
+    private val clickListener: OnLogoClickListener,
 ) : RecyclerView.Adapter<AdapterClass.ViewHolderClass>() {
-
     interface OnLogoClickListener {
         fun onLogoClick(itemId: Int)
     }
@@ -52,10 +49,7 @@ class AdapterClass(
                 currentItem.longitude.toString(),
             )
         holder.rvOpeningYear.text = currentItem.year_opened.toString()
-
-        // Handle click on imgLogo
         holder.rvName.setOnClickListener {
-            Log.i("ADAPTER"," AEEE"+currentItem.id)
             clickListener.onLogoClick(currentItem.id)
         }
     }

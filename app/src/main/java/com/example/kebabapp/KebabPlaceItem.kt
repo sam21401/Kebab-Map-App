@@ -10,5 +10,5 @@ data class KebabPlaceItem(
     val name: String,
     val updated_at: Any,
     val year_closed: Any,
-    val year_opened: String
+    val year_opened: String,
 )

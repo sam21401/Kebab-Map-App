@@ -7,5 +7,5 @@ data class OpeningHours(
     val sunday: String,
     val thursday: String,
     val tuesday: String,
-    val wednesday: String
+    val wednesday: String,
 )

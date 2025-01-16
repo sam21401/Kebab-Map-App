@@ -9,8 +9,12 @@ interface KebabService {
     suspend fun getAllKebabs(): Response<KebabResponse>
 
     @GET("api/kebab/show/{id}")
-    suspend fun getBasicKebabById(@Path("id") kebabId: String): Response<KebabBasicResponse>
+    suspend fun getBasicKebabById(
+        @Path("id") kebabId: String,
+    ): Response<KebabBasicResponse>
 
     @GET("api/kebab/details/{id}")
-    suspend fun getDetailsKebabById(@Path("id") kebabId: String): Response<KebabDetailResponse>
+    suspend fun getDetailsKebabById(
+        @Path("id") kebabId: String,
+    ): Response<KebabDetailResponse>
 }

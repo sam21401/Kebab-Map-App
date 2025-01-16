@@ -11,7 +11,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.kebabapp.databinding.ActivityMainBinding
 import com.example.kebabapp.utilities.KebabService
-import com.example.kebabapp.utilities.UserService
 import com.example.kebabapp.utilities.readJSONFromAssets
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
@@ -45,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     private suspend fun getAllKebab(kebabService: KebabService): KebabPlaces? {
         return try {
             val response = kebabService.getAllKebabs()

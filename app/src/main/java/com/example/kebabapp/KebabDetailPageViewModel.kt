@@ -1,9 +1,7 @@
 package com.example.kebabapp
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-
 
 class KebabDetailPageViewModel : ViewModel() {
     private val kebabId = MutableLiveData<Int>()

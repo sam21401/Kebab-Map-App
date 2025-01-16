@@ -23,8 +23,14 @@ object RetrofitClient {
             val url = request.url.toString()
 
             // List of endpoints that require the token
-            val endpointsRequiringToken = listOf("/api/logout", "/api/profile", "/api/kebab/showAll","/api/kebab/show","/api/kebab/details")
-
+            val endpointsRequiringToken =
+                listOf(
+                    "/api/logout",
+                    "/api/profile",
+                    "/api/kebab/showAll",
+                    "/api/kebab/show",
+                    "/api/kebab/details",
+                )
             val requiresToken = endpointsRequiringToken.any { url.contains(it) }
 
             val requestBuilder = request.newBuilder()

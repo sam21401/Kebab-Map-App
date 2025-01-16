@@ -1,6 +1,6 @@
 package com.example.kebabapp
 
-data class KebabPlaceDetailItem (
+data class KebabPlaceDetailItem(
     val created_at: Any,
     val id: Int,
     val is_chain_member: Int,
