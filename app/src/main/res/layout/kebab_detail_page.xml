@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_kebab_marker"
+        android:contentDescription="Kebab store logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- Name -->
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Store Name"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/logo"
+        app:layout_constraintTop_toTopOf="@id/logo" />
+
+    <!-- Address Label -->
+    <TextView
+        android:id="@+id/address_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address:"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/name" />
+
+    <!-- Address -->
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Address"
+        app:layout_constraintStart_toEndOf="@id/address_label"
+        app:layout_constraintTop_toTopOf="@id/address_label"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Opening Hours Label -->
+    <TextView
+        android:id="@+id/opening_hours_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Opening Hours:"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo" />
+
+    <!-- Opening Hours -->
+    <TextView
+        android:id="@+id/opening_hours"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="9:00 AM - 10:00 PM"
+        app:layout_constraintStart_toEndOf="@id/opening_hours_label"
+        app:layout_constraintTop_toTopOf="@id/opening_hours_label"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Meat Types Label -->
+    <TextView
+        android:id="@+id/meat_types_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Meat Types:"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/opening_hours" />
+
+    <!-- Meat Types -->
+    <TextView
+        android:id="@+id/meat_types"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Chicken, Lamb, Beef"
+        app:layout_constraintStart_toEndOf="@id/meat_types_label"
+        app:layout_constraintTop_toTopOf="@id/meat_types_label"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Sauces Label -->
+    <TextView
+        android:id="@+id/sauces_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sauces:"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/meat_types" />
+
+    <!-- Sauces -->
+    <TextView
+        android:id="@+id/sauces"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Garlic, Spicy, Yogurt"
+        app:layout_constraintStart_toEndOf="@id/sauces_label"
+        app:layout_constraintTop_toTopOf="@id/sauces_label"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Status Label -->
+    <TextView
+        android:id="@+id/status_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status:"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sauces" />
+
+    <!-- Status -->
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open"
+        app:layout_constraintStart_toEndOf="@id/status_label"
+        app:layout_constraintTop_toTopOf="@id/status_label"/>
+
+    <!-- Craft Indicator Label -->
+    <TextView
+        android:id="@+id/craft_indicator_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Craft:"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/status" />
+
+    <!-- Craft Indicator -->
+    <TextView
+        android:id="@+id/craft_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yes"
+        app:layout_constraintStart_toEndOf="@id/craft_indicator_label"
+        app:layout_constraintTop_toTopOf="@id/craft_indicator_label"/>
+
+    <!-- Stall Indicator Label -->
+    <TextView
+        android:id="@+id/stall_indicator_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stall:"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/craft_indicator" />
+
+    <!-- Stall Indicator -->
+    <TextView
+        android:id="@+id/stall_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No"
+        app:layout_constraintStart_toEndOf="@id/stall_indicator_label"
+        app:layout_constraintTop_toTopOf="@id/stall_indicator_label"/>
+
+    <!-- Chain Member Indicator Label -->
+    <TextView
+        android:id="@+id/chain_member_indicator_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chain Member:"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/stall_indicator" />
+
+    <!-- Chain Member Indicator -->
+    <TextView
+        android:id="@+id/chain_member_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yes"
+        app:layout_constraintStart_toEndOf="@id/chain_member_indicator_label"
+        app:layout_constraintTop_toTopOf="@id/chain_member_indicator_label"/>
+
+    <!-- Ordering Options Label -->
+    <TextView
+        android:id="@+id/ordering_options_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ordering Options:"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chain_member_indicator" />
+    <!-- Ordering Options -->
+    <TextView
+        android:id="@+id/ordering_options"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Ordering Options: Dine-in, Takeaway, Delivery"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/ordering_options_label"
+        app:layout_constraintTop_toBottomOf="@id/ordering_options_label"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

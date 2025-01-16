@@ -16,14 +16,15 @@
             android:id="@+id/kebab_logo"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="16dp"
             android:adjustViewBounds="true"
+            android:contentDescription="@string/kebab_logo"
             android:padding="8dp"
             android:scaleType="fitXY"
             android:src="@drawable/ic_kebab_marker"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:contentDescription="@string/kebab_logo"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/kebab_name"

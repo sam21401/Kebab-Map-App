@@ -67,9 +67,9 @@ class KebabMapFragment : Fragment() {
         val listOfMarkers: MutableList<MarkerOptions> = mutableListOf()
         for (item in kebabPlaces) {
             val markerOptions = MarkerOptions()
-            markerOptions.title(item.kebabName)
+            markerOptions.title(item.name)
             markerOptions.snippet(item.address)
-            markerOptions.position(LatLng(item.lat, item.long))
+            markerOptions.position(LatLng(item.latitude.toDouble(), item.longitude.toDouble()))
             markerOptions.icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromDrawable(R.drawable.ic_kebab_marker)))
             listOfMarkers.add(markerOptions)
         }
