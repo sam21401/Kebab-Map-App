@@ -94,8 +94,7 @@ class KebabDetailPage : Fragment() {
         var string = ""
         if (list != null) {
             for (name in list) {
-                string = string + name + "\n"
-                Log.i("STRING", name)
+                string = string + "‣ " + name + "\n"
             }
         }
         Log.i("STRING", string)

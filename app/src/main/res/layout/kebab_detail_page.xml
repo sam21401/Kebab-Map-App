@@ -25,9 +25,10 @@
         android:layout_height="wrap_content"
         android:text="Store Name"
         android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/logo"
-        app:layout_constraintTop_toTopOf="@id/logo"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/logo" />
 
     <!-- Address Label -->
     <TextView
@@ -35,8 +36,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Address:"
+        android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="@id/name"
-        app:layout_constraintTop_toBottomOf="@id/name"/>
+        app:layout_constraintTop_toBottomOf="@id/name" />
 
     <!-- Address -->
     <TextView
@@ -54,8 +56,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Opening Hours:"
+        android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logo"/>
+        app:layout_constraintTop_toBottomOf="@id/logo" />
 
     <!-- Opening Hours -->
     <TextView
@@ -73,8 +76,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Meat Types:"
+        android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/opening_hours"/>
+        app:layout_constraintTop_toBottomOf="@id/opening_hours" />
 
     <!-- Meat Types -->
     <TextView
@@ -92,8 +96,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sauces:"
+        android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/meat_types"/>
+        app:layout_constraintTop_toBottomOf="@id/meat_types" />
 
     <!-- Sauces -->
     <TextView
@@ -111,8 +116,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Status:"
+        android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sauces"/>
+        app:layout_constraintTop_toBottomOf="@id/sauces" />
 
     <!-- Status -->
     <TextView
@@ -129,8 +135,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Craft:"
+        android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/status"/>
+        app:layout_constraintTop_toBottomOf="@id/status" />
 
     <!-- Craft Indicator -->
     <TextView
@@ -147,8 +154,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Stall:"
+        android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/craft_indicator"/>
+        app:layout_constraintTop_toBottomOf="@id/craft_indicator" />
 
     <!-- Stall Indicator -->
     <TextView
@@ -165,8 +173,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Chain Member:"
+        android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/stall_indicator"/>
+        app:layout_constraintTop_toBottomOf="@id/stall_indicator" />
 
     <!-- Chain Member Indicator -->
     <TextView
@@ -183,8 +192,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ordering Options:"
+        android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chain_member_indicator"/>
+        app:layout_constraintTop_toBottomOf="@id/chain_member_indicator" />
     <!-- Ordering Options -->
     <TextView
         android:id="@+id/ordering_options"
