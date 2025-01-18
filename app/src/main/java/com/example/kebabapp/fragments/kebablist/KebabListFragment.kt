@@ -21,6 +21,7 @@ class KebabListFragment : Fragment(), AdapterClass.OnLogoClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var kebabDetailPageViewModel: KebabDetailPageViewModel
     private lateinit var sortSpinner: Spinner
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,9 +35,6 @@ class KebabListFragment : Fragment(), AdapterClass.OnLogoClickListener {
         sortSpinner = view.findViewById(R.id.sortSpinner)
         getData()
         setupSortSpinner()
-
-
-
         return view
     }
 
@@ -45,27 +43,37 @@ class KebabListFragment : Fragment(), AdapterClass.OnLogoClickListener {
         val adapter = AdapterClass(kebabViewModel.getKebabPlaces(), this)
         recyclerView.adapter = adapter
     }
+
     private fun setupSortSpinner() {
-        sortSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                val kebabViewModel = ViewModelProvider(requireActivity()).get(KebabPlaceViewModel::class.java)
-                val unsortedList = kebabViewModel.getKebabPlaces()
+        sortSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View?,
+                    position: Int,
+                    id: Long,
+                ) {
+                    val kebabViewModel = ViewModelProvider(requireActivity()).get(KebabPlaceViewModel::class.java)
+                    val unsortedList = kebabViewModel.getKebabPlaces()
 
-                var sortedList = when (position) {
-                    0 -> unsortedList.sortedBy { it.name }
-                    1 -> unsortedList.sortedByDescending { it.year_opened }
-                    else -> unsortedList
+                    val sortedList =
+                        when (position) {
+                            0 -> unsortedList.sortedBy { it.name }
+                            1 -> unsortedList.sortedByDescending { it.name }
+                            2 -> unsortedList.sortedByDescending { it.year_opened }
+                            3 -> unsortedList.sortedBy { it.year_opened }
+                            else -> unsortedList
+                        }
+                    val arraylist = KebabPlaces()
+                    sortedList.toCollection(arraylist)
+                    recyclerView.adapter = AdapterClass(arraylist, this@KebabListFragment)
                 }
-                val arraylist = KebabPlaces()
-                sortedList.toCollection(arraylist)
-                recyclerView.adapter = AdapterClass(arraylist, this@KebabListFragment)
-            }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // No action needed
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                }
             }
-        }
     }
+
     override fun onLogoClick(itemId: Int) {
         kebabDetailPageViewModel.setKebabId(itemId)
         Log.i("ADAPTER", kebabDetailPageViewModel.getKebabId().toString())

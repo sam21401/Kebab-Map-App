@@ -11,9 +11,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.kebabapp.databinding.ActivityMainBinding
 import com.example.kebabapp.utilities.KebabService
-import com.example.kebabapp.utilities.readJSONFromAssets
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -34,8 +32,6 @@ class MainActivity : AppCompatActivity() {
             RetrofitClient.setAuthToken(authToken)
         }
         val kebabService = RetrofitClient.retrofit.create(KebabService::class.java)
-        val jsonString = readJSONFromAssets(baseContext, "sampledata.json")
-        //val data = Gson().fromJson(jsonString, KebabPlaces::class.java)
         kebabPlaces = ViewModelProvider(this)[KebabPlaceViewModel::class.java]
         lifecycleScope.launch {
             val data = getAllKebab(kebabService)

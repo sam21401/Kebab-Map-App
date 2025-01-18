@@ -22,7 +22,9 @@
     <string name="name">Name</string>
     <string name="hello">"Hello, "</string>
     <string-array name="sort_options">
-        <item>Sort by Name</item>
-        <item>Sort by Opening Year</item>
+        <item>Sort by Name (A-Z)</item>
+        <item>Sort by Name (Z-A)</item>
+        <item>Sort by Opening Year (Descending)</item>
+        <item>Sort by Opening Year (Ascending)</item>
     </string-array>
 </resources>
