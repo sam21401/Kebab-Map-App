@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         }
         val kebabService = RetrofitClient.retrofit.create(KebabService::class.java)
         val jsonString = readJSONFromAssets(baseContext, "sampledata.json")
-        val data = Gson().fromJson(jsonString, KebabPlaces::class.java)
+        //val data = Gson().fromJson(jsonString, KebabPlaces::class.java)
         kebabPlaces = ViewModelProvider(this)[KebabPlaceViewModel::class.java]
         lifecycleScope.launch {
             val data = getAllKebab(kebabService)
