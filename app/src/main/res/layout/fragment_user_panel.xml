@@ -61,42 +61,22 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFavoriteKebabPlaces"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvFavoriteKebabPlaces" />
 
-    <TextView
-        android:id="@+id/tvComments"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Your Comments"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvFavoriteKebabPlaces" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvComments"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvComments" />
-
     <!-- Suggestions -->
     <TextView
         android:id="@+id/tvSuggestions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="Your Suggestions"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvComments" />
+        app:layout_constraintTop_toBottomOf="@+id/rvFavoriteKebabPlaces" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSuggestions"

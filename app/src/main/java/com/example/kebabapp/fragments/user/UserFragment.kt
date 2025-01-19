@@ -8,9 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kebabapp.KebabDetailPageViewModel
 import com.example.kebabapp.R
+import com.example.kebabapp.UserViewModel
 import com.example.kebabapp.databinding.FragmentUserPanelBinding
 import com.example.kebabapp.utilities.LogoutResponse
 import com.example.kebabapp.utilities.UserService
@@ -21,6 +25,7 @@ import retrofit2.Response
 
 class UserFragment : Fragment() {
     private lateinit var binding: FragmentUserPanelBinding
+    private lateinit var kebabDetailPageViewModel: KebabDetailPageViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +35,8 @@ class UserFragment : Fragment() {
         super.onCreate(savedInstanceState)
         binding = FragmentUserPanelBinding.inflate(layoutInflater)
         val userService = RetrofitClient.retrofit.create(UserService::class.java)
+        val userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+        kebabDetailPageViewModel = ViewModelProvider(requireActivity()).get(KebabDetailPageViewModel::class.java)
         val sharedPreferencesManager = context?.let { SharedPreferencesManager(it) }
         val isLogged = sharedPreferencesManager?.checkStatus()
         if (sharedPreferencesManager?.getName()?.isNotEmpty() == true) {
@@ -44,6 +51,7 @@ class UserFragment : Fragment() {
         }
         if (isLogged == true && sharedPreferencesManager.getName().isNullOrEmpty()) {
             viewLifecycleOwner.lifecycleScope.launch {
+                userViewModel.getFavKebabsFromApi(userService)
                 val userName = getUserName(userService)
                 if (!userName.isNullOrEmpty()) {
                     binding.tvUserLoggedName.text = userName
@@ -51,6 +59,14 @@ class UserFragment : Fragment() {
                 } else {
                     binding.tvUserLoggedName.text = "Failed to load username"
                 }
+            }
+        }
+        if (isLogged == true) {
+            binding.rvFavoriteKebabPlaces.layoutManager = LinearLayoutManager(context)
+            binding.rvFavoriteKebabPlaces.setHasFixedSize(true)
+            viewLifecycleOwner.lifecycleScope.launch {
+                userViewModel.getFavKebabsFromApi(userService)
+                getData()
             }
         }
         binding.buttonLogout.setOnClickListener {
@@ -66,6 +82,7 @@ class UserFragment : Fragment() {
                     ) {
                         if (response.isSuccessful) {
                             RetrofitClient.setAuthToken("")
+                            userViewModel.clearFavKebabPlaces()
                             Log.i("LOGOUT", "SUCCESS LOGOUT")
                         } else {
                             Log.i("LOGOUT", "Something went wrong ")
@@ -97,5 +114,11 @@ class UserFragment : Fragment() {
             Log.e("Profile", "Failure: ${e.message}")
             null
         }
+    }
+
+    private fun getData() {
+        val userViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
+        val adapter = AdapterFavoritesClass(userViewModel.getFavKebabPlaces())
+        binding.rvFavoriteKebabPlaces.adapter = adapter
     }
 }
