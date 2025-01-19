@@ -7,12 +7,10 @@ class KebabPlaceViewModel : ViewModel() {
     private var kebabPlaces = KebabPlaces()
     private var kebabFilteredPlaces = KebabPlaces()
 
-    // Getter for LiveData
     fun getKebabPlaces(): KebabPlaces {
         return kebabPlaces
     }
 
-    // Setter to update JSON data
     fun setKebabPlaces(kebabList: KebabPlaces) =
         try {
             kebabPlaces = kebabList

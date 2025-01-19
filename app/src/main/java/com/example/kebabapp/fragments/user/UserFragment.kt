@@ -8,9 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.kebabapp.R
+import com.example.kebabapp.UserViewModel
 import com.example.kebabapp.databinding.FragmentUserPanelBinding
 import com.example.kebabapp.utilities.LogoutResponse
 import com.example.kebabapp.utilities.UserService
@@ -30,6 +32,7 @@ class UserFragment : Fragment() {
         super.onCreate(savedInstanceState)
         binding = FragmentUserPanelBinding.inflate(layoutInflater)
         val userService = RetrofitClient.retrofit.create(UserService::class.java)
+        val userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
         val sharedPreferencesManager = context?.let { SharedPreferencesManager(it) }
         val isLogged = sharedPreferencesManager?.checkStatus()
         if (sharedPreferencesManager?.getName()?.isNotEmpty() == true) {
@@ -44,6 +47,7 @@ class UserFragment : Fragment() {
         }
         if (isLogged == true && sharedPreferencesManager.getName().isNullOrEmpty()) {
             viewLifecycleOwner.lifecycleScope.launch {
+                userViewModel.getFavKebabsFromApi(userService)
                 val userName = getUserName(userService)
                 if (!userName.isNullOrEmpty()) {
                     binding.tvUserLoggedName.text = userName
