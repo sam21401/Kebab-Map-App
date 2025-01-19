@@ -34,14 +34,12 @@ class KebabPlaceViewModel : ViewModel() {
     fun clearFilteredKebabPlaces() {
         kebabFilteredPlaces.clear()
     }
+
     fun getKebabsAmount(): Int {
-        if(kebabFilteredPlaces.isNullOrEmpty())
-        {
-           return kebabPlaces.size
-        }
-        else {
-            return  kebabFilteredPlaces.size
+        if (kebabFilteredPlaces.isNullOrEmpty()) {
+            return kebabPlaces.size
+        } else {
+            return kebabFilteredPlaces.size
         }
     }
-
 }

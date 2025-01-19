@@ -21,7 +21,6 @@ interface KebabService {
 
     @GET("api/kebab/filter")
     suspend fun getFilteredKebabs(
-        @QueryMap filters: Map<String, String>
+        @QueryMap filters: Map<String, String>,
     ): Response<KebabResponse>
-
 }

@@ -62,6 +62,7 @@ class KebabListFragment : Fragment(), AdapterClass.OnLogoClickListener {
     private lateinit var buttonFilter: Button
     private lateinit var buttonClear: Button
     private lateinit var kebabTotal: TextView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -87,7 +88,7 @@ class KebabListFragment : Fragment(), AdapterClass.OnLogoClickListener {
         checkboxSauceSpicy = view.findViewById(R.id.checkboxSauceSpicy)
         checkboxSauceKetchup = view.findViewById(R.id.checkboxSauceKetchup)
         checkboxSauceMixed = view.findViewById(R.id.checkboxSauceMixed)
-        //Ordering options
+        // Ordering options
         checkboxOrderingOnSite = view.findViewById(R.id.checkboxOrderingOnSite)
         checkboxOrderingDelivery = view.findViewById(R.id.checkboxOrderingDelivery)
         checkboxOrderingTakeaway = view.findViewById(R.id.checkboxOrderingTakeaway)
@@ -125,29 +126,33 @@ class KebabListFragment : Fragment(), AdapterClass.OnLogoClickListener {
 
     private fun setTotalKebabs() {
         val kebabViewModel = ViewModelProvider(requireActivity()).get(KebabPlaceViewModel::class.java)
-        val kebabsTotalAmount =  kebabViewModel.getKebabsAmount().toString()
+        val kebabsTotalAmount = kebabViewModel.getKebabsAmount().toString()
         kebabTotal.text = "Total kebab amount: " + kebabsTotalAmount
     }
 
     private fun applyFilters() {
         val filters = mutableMapOf<String, String>()
-        filters["status"] = when {
-            radioButtonClosed.isChecked -> "CLOSED"
-            radioButtonOpen.isChecked -> "OPEN"
-            else -> ""
-        }
-        filters["is_craft"] = when {
-            checkboxCraft.isChecked -> "true"
-            else -> ""
-        }
-        filters["is_in_stall"] = when {
-            checkboxStall.isChecked -> "true"
-            else -> ""
-        }
-        filters["is_chain_member"] = when {
-            checkboxChain.isChecked -> "true"
-            else -> ""
-        }
+        filters["status"] =
+            when {
+                radioButtonClosed.isChecked -> "CLOSED"
+                radioButtonOpen.isChecked -> "OPEN"
+                else -> ""
+            }
+        filters["is_craft"] =
+            when {
+                checkboxCraft.isChecked -> "true"
+                else -> ""
+            }
+        filters["is_in_stall"] =
+            when {
+                checkboxStall.isChecked -> "true"
+                else -> ""
+            }
+        filters["is_chain_member"] =
+            when {
+                checkboxChain.isChecked -> "true"
+                else -> ""
+            }
         val meatTypes = mutableListOf<String>()
         if (checkboxMeatChicken.isChecked) meatTypes.add("chicken")
         if (checkboxMeatBeef.isChecked) meatTypes.add("beef")
@@ -187,14 +192,16 @@ class KebabListFragment : Fragment(), AdapterClass.OnLogoClickListener {
         }
     }
 
-    private suspend fun getFilteredKebabs(filters: Map<String,String>, kebabService: KebabService): KebabPlaces?
-    {
+    private suspend fun getFilteredKebabs(
+        filters: Map<String, String>,
+        kebabService: KebabService,
+    ): KebabPlaces? {
         return try {
             val response = kebabService.getFilteredKebabs(filters)
             if (response.isSuccessful) {
                 response.body()?.data
             } else {
-                Toast.makeText(context, "Kebabs not found :(", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Kebabs not found :(", Toast.LENGTH_LONG).show()
                 null
             }
         } catch (e: Exception) {
@@ -215,16 +222,13 @@ class KebabListFragment : Fragment(), AdapterClass.OnLogoClickListener {
 
     private fun getData() {
         val kebabViewModel = ViewModelProvider(requireActivity()).get(KebabPlaceViewModel::class.java)
-        if(kebabViewModel.getFilteredKebabPlaces().isEmpty())
-        {
+        if (kebabViewModel.getFilteredKebabPlaces().isEmpty()) {
             val adapter = AdapterClass(kebabViewModel.getKebabPlaces(), this)
             recyclerView.adapter = adapter
-        }
-        else {
+        } else {
             val adapter = AdapterClass(kebabViewModel.getFilteredKebabPlaces(), this)
             recyclerView.adapter = adapter
         }
-
     }
 
     private fun setupSortSpinner() {
@@ -238,12 +242,9 @@ class KebabListFragment : Fragment(), AdapterClass.OnLogoClickListener {
                 ) {
                     val kebabViewModel = ViewModelProvider(requireActivity()).get(KebabPlaceViewModel::class.java)
                     var unsortedList: KebabPlaces
-                    if(kebabViewModel.getFilteredKebabPlaces().isEmpty())
-                    {
+                    if (kebabViewModel.getFilteredKebabPlaces().isEmpty()) {
                         unsortedList = kebabViewModel.getKebabPlaces()
-                    }
-                    else
-                    {
+                    } else {
                         unsortedList = kebabViewModel.getFilteredKebabPlaces()
                     }
                     val sortedList =
