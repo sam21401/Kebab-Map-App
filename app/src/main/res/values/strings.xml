@@ -21,6 +21,35 @@
     <string name="register">REGISTER</string>
     <string name="name">Name</string>
     <string name="hello">"Hello, "</string>
+    <string name="clear">Clear</string>
+    <string name="filter">Filter</string>
+    <string name="filter_options">Filter options</string>
+    <string name="status">Status</string>
+    <string name="closed_temporarily">Closed temporarily</string>
+    <string name="open">Open</string>
+    <string name="craft_kebab">Craft kebab</string>
+    <string name="in_stall">In stall</string>
+    <string name="chain_member">Chain member</string>
+    <string name="meat_types">Meat types</string>
+    <string name="chicken">chicken</string>
+    <string name="beef">beef</string>
+    <string name="falafel">falafel</string>
+    <string name="sauces">Sauces</string>
+    <string name="mild">mild</string>
+    <string name="garlic">garlic</string>
+    <string name="spicy">spicy</string>
+    <string name="mixed">mixed</string>
+    <string name="ketchup">ketchup</string>
+    <string name="ordering_options">Ordering Options</string>
+    <string name="on_site">on-site</string>
+    <string name="delivery">delivery</string>
+    <string name="takeaway">takeaway</string>
+    <string name="glovo">GLOVO</string>
+    <string name="pyszne_pl">Pyszne.pl</string>
+    <string name="ubereats">UberEats</string>
+    <string name="website">website</string>
+    <string name="app">app</string>
+    <string name="phone">phone</string>
     <string-array name="sort_options">
         <item>Sort by Name (A-Z)</item>
         <item>Sort by Name (Z-A)</item>

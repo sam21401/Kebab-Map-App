@@ -53,7 +53,6 @@
             android:id="@+id/kebabTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
             app:layout_constraintBottom_toTopOf="@+id/recyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,179 +71,183 @@
             android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
             <LinearLayout
+                style="?android:attr/buttonBarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnFilter"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:background="@color/orange"
-                    android:text="Filter" />
+                    android:text="@string/filter" />
 
                 <Button
                     android:id="@+id/btnFilterClear"
-                    android:layout_width="wrap_content"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
                     android:background="@color/yellow"
-                    android:text="Clear" />
+                    android:text="@string/clear" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Filter options"
+                android:text="@string/filter_options"
                 android:textSize="20sp"
                 android:textStyle="bold" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Status"
+                android:text="@string/status"
                 android:textSize="20sp"
                 android:textStyle="bold" />
             <RadioGroup
+                android:id="@+id/radioGroupStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <RadioButton
                     android:id="@+id/radioButton1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="CLOSED" />
+                    android:text="@string/closed_temporarily" />
                 <RadioButton
                     android:id="@+id/radioButton2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="OPEN" />
+                    android:text="@string/open" />
             </RadioGroup>
             <CheckBox
                 android:id="@+id/checkboxCraft"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Craft kebab?" />
+                android:text="@string/craft_kebab" />
 
             <CheckBox
                 android:id="@+id/checkboxStall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="In stall" />
+                android:text="@string/in_stall" />
 
             <CheckBox
                 android:id="@+id/checkboxChain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chain member" />
+                android:text="@string/chain_member" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Meat types"
+                android:text="@string/meat_types"
                 android:textSize="20sp"
                 android:textStyle="bold" />
             <CheckBox
                 android:id="@+id/checkboxMeatChicken"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="chicken" />
+                android:text="@string/chicken" />
             <CheckBox
                 android:id="@+id/checkboxMeatBeef"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="beef" />
+                android:text="@string/beef" />
             <CheckBox
                 android:id="@+id/checkboxMeatFalafel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="falafel" />
+                android:text="@string/falafel" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sauces"
+                android:text="@string/sauces"
                 android:textSize="20sp"
                 android:textStyle="bold" />
             <CheckBox
                 android:id="@+id/checkboxSauceMild"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="mild" />
+                android:text="@string/mild" />
             <CheckBox
                 android:id="@+id/checkboxSauceGarlic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="garlic" />
+                android:text="@string/garlic" />
             <CheckBox
                 android:id="@+id/checkboxSauceSpicy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="spicy" />
+                android:text="@string/spicy" />
             <CheckBox
                 android:id="@+id/checkboxSauceMixed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="mixed" />
+                android:text="@string/mixed" />
             <CheckBox
                 android:id="@+id/checkboxSauceKetchup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ketchup" />
+                android:text="@string/ketchup" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ordering Options"
+                android:text="@string/ordering_options"
                 android:textSize="20sp"
                 android:textStyle="bold" />
             <CheckBox
                 android:id="@+id/checkboxOrderingOnSite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="on-site" />
+                android:text="@string/on_site" />
             <CheckBox
                 android:id="@+id/checkboxOrderingDelivery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="delivery" />
+                android:text="@string/delivery" />
             <CheckBox
                 android:id="@+id/checkboxOrderingTakeaway"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="takeaway" />
+                android:text="@string/takeaway" />
             <CheckBox
                 android:id="@+id/checkboxOrderingGLOVO"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="GLOVO" />
+                android:text="@string/glovo" />
             <CheckBox
                 android:id="@+id/checkboxOrderingPyszne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pyszne.pl" />
+                android:text="@string/pyszne_pl" />
             <CheckBox
                 android:id="@+id/checkboxOrderingUber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="UberEats" />
+                android:text="@string/ubereats" />
             <CheckBox
                 android:id="@+id/checkboxOrderingWebsite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="website" />
+                android:text="@string/website" />
             <CheckBox
                 android:id="@+id/checkboxOrderingApp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="app" />
+                android:text="@string/app" />
             <CheckBox
                 android:id="@+id/checkboxOrderingPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="phone" />
+                android:text="@string/phone" />
         </LinearLayout>
         </ScrollView>
     </com.google.android.material.navigation.NavigationView>
