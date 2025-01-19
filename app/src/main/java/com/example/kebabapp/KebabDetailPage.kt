@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.kebabapp.databinding.KebabDetailPageBinding
-import com.example.kebabapp.utilities.KebabResponse
 import com.example.kebabapp.utilities.KebabService
 import com.example.kebabapp.utilities.UserService
 import com.google.android.material.snackbar.Snackbar
@@ -48,50 +47,45 @@ class KebabDetailPage : Fragment() {
             binding.orderingOptions.text = getStringFromTable(kebabDetailItem?.ordering_options)
             binding.openingHours.text = getOpeningHours(kebabOpeningHours)
         }
-        if( isLogged == true) {
+        if (isLogged == true) {
             viewLifecycleOwner.lifecycleScope.launch {
                 userViewModel.getFavKebabsFromApi(userService)
             }
             checkIfFavourite(kebabId, userViewModel)
-            binding.favHeart.setOnClickListener{
+            binding.favHeart.setOnClickListener {
                 viewLifecycleOwner.lifecycleScope.launch {
-                    if(userViewModel.checkIfKebabIsFavourite(kebabId.toInt()) == false)
-                    {
+                    if (userViewModel.checkIfKebabIsFavourite(kebabId.toInt()) == false) {
                         addToFavourites(userService, kebabId)
                         binding.favHeart.setImageResource(R.drawable.ic_favorite)
                         userViewModel.getFavKebabsFromApi(userService)
-                    }
-                    else
-                    {
+                    } else {
                         removeFromFavourites(userService, kebabId)
                         binding.favHeart.setImageResource(R.drawable.ic_favorite_empty)
                         userViewModel.getFavKebabsFromApi(userService)
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             binding.favHeart.visibility = View.GONE
         }
         return binding.root
     }
 
-    private fun checkIfFavourite(kebabId: String,userViewModel: UserViewModel) {
-        val check =  userViewModel.checkIfKebabIsFavourite(kebabId.toInt())
-        if (check == true)
-        {
+    private fun checkIfFavourite(
+        kebabId: String,
+        userViewModel: UserViewModel,
+    ) {
+        val check = userViewModel.checkIfKebabIsFavourite(kebabId.toInt())
+        if (check == true) {
             binding.favHeart.setImageResource(R.drawable.ic_favorite)
-        }
-        else
-        {
+        } else {
             binding.favHeart.setImageResource(R.drawable.ic_favorite_empty)
         }
     }
 
     private suspend fun removeFromFavourites(
         userService: UserService,
-        kebabId: String
+        kebabId: String,
     ) {
         try {
             val response = userService.removeFromFavourites(kebabId)
@@ -102,13 +96,12 @@ class KebabDetailPage : Fragment() {
             }
         } catch (e: Exception) {
             Log.e("Profile", "Failure: ${e.message}")
-
         }
     }
 
     private suspend fun addToFavourites(
         userService: UserService,
-        kebabId: String
+        kebabId: String,
     ) {
         try {
             val response = userService.addToFavourites(kebabId)
@@ -119,7 +112,6 @@ class KebabDetailPage : Fragment() {
             }
         } catch (e: Exception) {
             Log.e("Profile", "Failure: ${e.message}")
-
         }
     }
 

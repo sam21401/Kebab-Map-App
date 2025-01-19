@@ -61,8 +61,7 @@ class UserFragment : Fragment() {
                 }
             }
         }
-        if(isLogged == true)
-        {
+        if (isLogged == true) {
             binding.rvFavoriteKebabPlaces.layoutManager = LinearLayoutManager(context)
             binding.rvFavoriteKebabPlaces.setHasFixedSize(true)
             viewLifecycleOwner.lifecycleScope.launch {

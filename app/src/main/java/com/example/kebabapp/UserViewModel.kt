@@ -3,7 +3,6 @@ package com.example.kebabapp
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.kebabapp.utilities.UserService
-import org.json.JSONException
 
 class UserViewModel : ViewModel() {
     private var favKebabPlaces = KebabPlaces()
@@ -16,23 +15,19 @@ class UserViewModel : ViewModel() {
         try {
             val response = userService.getFavourites()
             if (response.isSuccessful) {
-                Log.i("FAVS",response.body()?.data.toString())
+                Log.i("FAVS", response.body()?.data.toString())
                 favKebabPlaces = response.body()?.data!!
             } else {
                 Log.e("Profile", "Error: ${response.code()} - ${response.message()}")
-
             }
         } catch (e: Exception) {
             Log.e("Profile", "Failure: ${e.message}")
-
         }
     }
 
     fun checkIfKebabIsFavourite(kebabId: Int): Boolean {
-        for (kebab in favKebabPlaces)
-        {
-            if (kebab.id == kebabId)
-            {
+        for (kebab in favKebabPlaces) {
+            if (kebab.id == kebabId) {
                 return true
             }
         }
@@ -42,5 +37,4 @@ class UserViewModel : ViewModel() {
     fun clearFavKebabPlaces() {
         favKebabPlaces.clear()
     }
-
 }

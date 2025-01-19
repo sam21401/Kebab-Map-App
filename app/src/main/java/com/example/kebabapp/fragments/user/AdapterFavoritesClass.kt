@@ -10,8 +10,7 @@ import com.example.kebabapp.R
 
 class AdapterFavoritesClass(
     private val dataList: KebabPlaces,
-    ) : RecyclerView.Adapter<AdapterFavoritesClass.ViewHolderClass>() {
-
+) : RecyclerView.Adapter<AdapterFavoritesClass.ViewHolderClass>() {
     class ViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val rvName: TextView = itemView.findViewById(R.id.fav_kebab_name)
         val rvAddress: TextView = itemView.findViewById(R.id.fav_kebab_address)
@@ -19,21 +18,22 @@ class AdapterFavoritesClass(
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): ViewHolderClass {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_fav_layout, parent, false)
         return ViewHolderClass(itemView)
     }
 
-    override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
+    override fun onBindViewHolder(
+        holder: ViewHolderClass,
+        position: Int,
+    ) {
         val currentItem = dataList[position]
         holder.rvName.text = currentItem.name
         holder.rvAddress.text = currentItem.address
     }
 
-
     override fun getItemCount(): Int {
         return dataList.size
     }
-
 }

@@ -23,21 +23,23 @@ object RetrofitClient {
             val url = request.url.toString()
 
             // List of endpoints that require the token, with placeholders
-            val endpointsRequiringToken = listOf(
-                "/api/logout",
-                "/api/profile",
-                "/api/kebab/showAll",
-                "/api/kebab/show",
-                "/api/kebab/details",
-                "/api/kebab/{id}/fav",
-                "/api/kebab/favorites",
-                "/api/kebab/{id}/favdelete",
-            )
+            val endpointsRequiringToken =
+                listOf(
+                    "/api/logout",
+                    "/api/profile",
+                    "/api/kebab/showAll",
+                    "/api/kebab/show",
+                    "/api/kebab/details",
+                    "/api/kebab/{id}/fav",
+                    "/api/kebab/favorites",
+                    "/api/kebab/{id}/favdelete",
+                )
 
             // Check if the URL matches any endpoint pattern
-            val requiresToken = endpointsRequiringToken.any { pattern ->
-                matchEndpointPattern(pattern, url)
-            }
+            val requiresToken =
+                endpointsRequiringToken.any { pattern ->
+                    matchEndpointPattern(pattern, url)
+                }
 
             val requestBuilder = request.newBuilder()
 
@@ -62,7 +64,10 @@ object RetrofitClient {
             .build()
 
     // Helper function to match endpoint patterns with placeholders
-    private fun matchEndpointPattern(pattern: String, url: String): Boolean {
+    private fun matchEndpointPattern(
+        pattern: String,
+        url: String,
+    ): Boolean {
         // Replace `{id}` placeholders with a regex wildcard (e.g., matching numeric IDs)
         val regexPattern = pattern.replace("{id}", "\\d+")
         return Regex(regexPattern).containsMatchIn(url)

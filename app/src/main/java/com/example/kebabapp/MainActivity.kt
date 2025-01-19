@@ -40,8 +40,7 @@ class MainActivity : AppCompatActivity() {
             val data = getAllKebab(kebabService)
             if (data != null) {
                 kebabPlaces.setKebabPlaces(data)
-                if(sharedPreferencesManager.checkStatus() == true)
-                {
+                if (sharedPreferencesManager.checkStatus() == true) {
                     userViewModel.getFavKebabsFromApi(userService)
                 }
             }
