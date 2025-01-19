@@ -11,6 +11,7 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -26,7 +27,6 @@ import com.example.kebabapp.R
 import com.example.kebabapp.databinding.FragmentKebabListBinding
 import com.example.kebabapp.utilities.KebabService
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 class KebabListFragment : Fragment(), AdapterClass.OnLogoClickListener {
@@ -61,6 +61,7 @@ class KebabListFragment : Fragment(), AdapterClass.OnLogoClickListener {
     private lateinit var checkboxOrderingPhone: CheckBox
     private lateinit var buttonFilter: Button
     private lateinit var buttonClear: Button
+    private lateinit var kebabTotal: TextView
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -103,17 +104,29 @@ class KebabListFragment : Fragment(), AdapterClass.OnLogoClickListener {
         drawerLayout = view.findViewById(R.id.drawer_layout)
         navView = view.findViewById(R.id.nav_view)
         btnOpenDrawer = view.findViewById(R.id.btn_open_drawer)
-
+        kebabTotal = view.findViewById(R.id.kebabTotal)
+        val kebabViewModel = ViewModelProvider(requireActivity()).get(KebabPlaceViewModel::class.java)
         btnOpenDrawer.setOnClickListener {
             drawerLayout.openDrawer(navView)
         }
         buttonFilter.setOnClickListener {
             applyFilters()
+            setTotalKebabs()
         }
+
         buttonClear.setOnClickListener {
+            kebabViewModel.clearFilteredKebabPlaces()
             getData()
+            setTotalKebabs()
         }
+        setTotalKebabs()
         return view
+    }
+
+    private fun setTotalKebabs() {
+        val kebabViewModel = ViewModelProvider(requireActivity()).get(KebabPlaceViewModel::class.java)
+        val kebabsTotalAmount =  kebabViewModel.getKebabsAmount().toString()
+        kebabTotal.text = "Total kebab amount: " + kebabsTotalAmount
     }
 
     private fun applyFilters() {
@@ -139,7 +152,7 @@ class KebabListFragment : Fragment(), AdapterClass.OnLogoClickListener {
         if (checkboxMeatChicken.isChecked) meatTypes.add("chicken")
         if (checkboxMeatBeef.isChecked) meatTypes.add("beef")
         if (checkboxMeatFalafel.isChecked) meatTypes.add("falafel")
-        filters["meatTypes"] = meatTypes.joinToString(",")
+        filters["meat_types"] = meatTypes.joinToString(",")
         val sauces = mutableListOf<String>()
         if (checkboxSauceMild.isChecked) sauces.add("mild")
         if (checkboxSauceGarlic.isChecked) sauces.add("garlic")
@@ -157,13 +170,17 @@ class KebabListFragment : Fragment(), AdapterClass.OnLogoClickListener {
         if (checkboxOrderingWebsite.isChecked) orderingOptions.add("website")
         if (checkboxOrderingApp.isChecked) orderingOptions.add("app")
         if (checkboxOrderingPhone.isChecked) orderingOptions.add("phone")
-        filters["orderingOptions"] = orderingOptions.joinToString(",")
+        filters["ordering_options"] = orderingOptions.joinToString(",")
+        removeEmptyKeys(filters)
         val kebabService = RetrofitClient.retrofit.create(KebabService::class.java)
+        val kebabViewModel = ViewModelProvider(requireActivity()).get(KebabPlaceViewModel::class.java)
         viewLifecycleOwner.lifecycleScope.launch {
             val filteredKebabs = getFilteredKebabs(filters, kebabService)
             if (filteredKebabs != null && filteredKebabs.isNotEmpty()) {
+                kebabViewModel.setFilteredKebabPlaces(filteredKebabs)
                 val adapter = AdapterClass(filteredKebabs, this@KebabListFragment)
                 recyclerView.adapter = adapter
+                setTotalKebabs()
             } else {
                 Log.i("KebabListFragment", "No data found for the applied filters.")
             }
@@ -186,10 +203,28 @@ class KebabListFragment : Fragment(), AdapterClass.OnLogoClickListener {
         }
     }
 
+    private fun removeEmptyKeys(map: MutableMap<String, String>) {
+        val iterator = map.entries.iterator()
+        while (iterator.hasNext()) {
+            val entry = iterator.next()
+            if (entry.value.isEmpty()) {
+                iterator.remove()
+            }
+        }
+    }
+
     private fun getData() {
         val kebabViewModel = ViewModelProvider(requireActivity()).get(KebabPlaceViewModel::class.java)
-        val adapter = AdapterClass(kebabViewModel.getKebabPlaces(), this)
-        recyclerView.adapter = adapter
+        if(kebabViewModel.getFilteredKebabPlaces().isEmpty())
+        {
+            val adapter = AdapterClass(kebabViewModel.getKebabPlaces(), this)
+            recyclerView.adapter = adapter
+        }
+        else {
+            val adapter = AdapterClass(kebabViewModel.getFilteredKebabPlaces(), this)
+            recyclerView.adapter = adapter
+        }
+
     }
 
     private fun setupSortSpinner() {
@@ -202,8 +237,15 @@ class KebabListFragment : Fragment(), AdapterClass.OnLogoClickListener {
                     id: Long,
                 ) {
                     val kebabViewModel = ViewModelProvider(requireActivity()).get(KebabPlaceViewModel::class.java)
-                    val unsortedList = kebabViewModel.getKebabPlaces()
-
+                    var unsortedList: KebabPlaces
+                    if(kebabViewModel.getFilteredKebabPlaces().isEmpty())
+                    {
+                        unsortedList = kebabViewModel.getKebabPlaces()
+                    }
+                    else
+                    {
+                        unsortedList = kebabViewModel.getFilteredKebabPlaces()
+                    }
                     val sortedList =
                         when (position) {
                             0 -> unsortedList.sortedBy { it.name }
