@@ -43,4 +43,9 @@ interface UserService {
 
     @GET("api/kebab/favorites")
     suspend fun getFavourites(): Response<KebabResponse>
+
+    @POST("api/suggest/add")
+    suspend fun sendSuggestion(
+        @Query("subject") subject: String,
+    ): Response<SuggestionResponse>
 }

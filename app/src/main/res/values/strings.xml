@@ -50,6 +50,9 @@
     <string name="website">website</string>
     <string name="app">app</string>
     <string name="phone">phone</string>
+    <string name="user_suggestion_form">User Suggestion Form</string>
+    <string name="write_your_suggestion_here">Write your suggestion here...</string>
+    <string name="submit">Submit</string>
     <string-array name="sort_options">
         <item>Sort by Name (A-Z)</item>
         <item>Sort by Name (Z-A)</item>

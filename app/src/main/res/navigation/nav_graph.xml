@@ -54,5 +54,9 @@
         android:id="@+id/navigation_kebab_detail_page"
         android:name="com.example.kebabapp.KebabDetailPage">
     </fragment>
+    <fragment
+        android:id="@+id/navigation_suggestion_form_page"
+        android:name="com.example.kebabapp.fragments.SuggestionFormFragment">
+    </fragment>
 
 </navigation>
