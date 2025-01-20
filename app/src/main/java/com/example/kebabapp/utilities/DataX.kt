@@ -5,5 +5,5 @@ data class DataX(
     val id: Int,
     val subject: String,
     val updated_at: String,
-    val user_id: Int
+    val user_id: Int,
 )
