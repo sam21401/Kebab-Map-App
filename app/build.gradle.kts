@@ -68,6 +68,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.drawerlayout)
     implementation(libs.logging.interceptor)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.retrofit)

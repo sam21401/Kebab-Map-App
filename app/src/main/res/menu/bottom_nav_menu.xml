@@ -11,7 +11,11 @@
         android:icon="@drawable/ic_map"
         android:title="Map"
          />
-
+    <item
+        android:id="@+id/navigation_suggestion_form_page"
+        android:icon="@drawable/ic_suggestion"
+        android:title="Suggest"
+    />
     <item
         android:id="@+id/navigation_user"
         android:icon="@drawable/ic_person_24"

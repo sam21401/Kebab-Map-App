@@ -16,13 +16,13 @@ object RetrofitClient {
             level = HttpLoggingInterceptor.Level.BODY
         }
 
-    // Interceptor to add the Bearer token to every request
+    // Interceptor to add the Bearer token to specific requests
     private val tokenInterceptor =
         Interceptor { chain ->
             val request = chain.request()
             val url = request.url.toString()
 
-            // List of endpoints that require the token
+            // List of endpoints that require the token, with placeholders
             val endpointsRequiringToken =
                 listOf(
                     "/api/logout",
@@ -30,8 +30,17 @@ object RetrofitClient {
                     "/api/kebab/showAll",
                     "/api/kebab/show",
                     "/api/kebab/details",
+                    "/api/kebab/{id}/fav",
+                    "/api/kebab/favorites",
+                    "/api/kebab/{id}/favdelete",
+                    "/api/suggest/add",
                 )
-            val requiresToken = endpointsRequiringToken.any { url.contains(it) }
+
+            // Check if the URL matches any endpoint pattern
+            val requiresToken =
+                endpointsRequiringToken.any { pattern ->
+                    matchEndpointPattern(pattern, url)
+                }
 
             val requestBuilder = request.newBuilder()
 
@@ -54,6 +63,16 @@ object RetrofitClient {
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
+
+    // Helper function to match endpoint patterns with placeholders
+    private fun matchEndpointPattern(
+        pattern: String,
+        url: String,
+    ): Boolean {
+        // Replace `{id}` placeholders with a regex wildcard (e.g., matching numeric IDs)
+        val regexPattern = pattern.replace("{id}", "\\d+")
+        return Regex(regexPattern).containsMatchIn(url)
+    }
 
     fun setAuthToken(token: String) {
         authToken = token

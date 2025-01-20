@@ -2,9 +2,11 @@ package com.example.kebabapp.utilities
 
 import retrofit2.Call
 import retrofit2.Response
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface UserService {
@@ -28,4 +30,22 @@ interface UserService {
 
     @GET("api/logout")
     fun logoutUser(): Call<LogoutResponse>
+
+    @POST("api/kebab/{id}/fav")
+    suspend fun addToFavourites(
+        @Path("id") kebabId: String,
+    ): Response<KebabResponse>
+
+    @DELETE("api/kebab/{id}/favdelete")
+    suspend fun removeFromFavourites(
+        @Path("id") kebabId: String,
+    ): Response<KebabResponse>
+
+    @GET("api/kebab/favorites")
+    suspend fun getFavourites(): Response<KebabResponse>
+
+    @POST("api/suggest/add")
+    suspend fun sendSuggestion(
+        @Query("subject") subject: String,
+    ): Response<SuggestionResponse>
 }

@@ -11,9 +11,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.kebabapp.databinding.ActivityMainBinding
 import com.example.kebabapp.utilities.KebabService
-import com.example.kebabapp.utilities.readJSONFromAssets
+import com.example.kebabapp.utilities.UserService
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +24,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val userService = RetrofitClient.retrofit.create(UserService::class.java)
+        val userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
         val navController = navHostFragment.navController
         val navView: BottomNavigationView = findViewById(R.id.bottomNavigation)
         navView.setupWithNavController(navController)
@@ -34,13 +35,14 @@ class MainActivity : AppCompatActivity() {
             RetrofitClient.setAuthToken(authToken)
         }
         val kebabService = RetrofitClient.retrofit.create(KebabService::class.java)
-        val jsonString = readJSONFromAssets(baseContext, "sampledata.json")
-        val data = Gson().fromJson(jsonString, KebabPlaces::class.java)
         kebabPlaces = ViewModelProvider(this)[KebabPlaceViewModel::class.java]
         lifecycleScope.launch {
             val data = getAllKebab(kebabService)
             if (data != null) {
                 kebabPlaces.setKebabPlaces(data)
+                if (sharedPreferencesManager.checkStatus() == true) {
+                    userViewModel.getFavKebabsFromApi(userService)
+                }
             }
         }
     }

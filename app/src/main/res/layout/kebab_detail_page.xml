@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
@@ -11,26 +12,41 @@
         android:id="@+id/logo"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:contentDescription="Kebab store logo"
         android:padding="8dp"
         android:scaleType="fitXY"
         android:src="@drawable/ic_kebab_marker"
-        android:contentDescription="Kebab store logo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Name -->
+
+    <!-- Address Label -->
+
     <TextView
         android:id="@+id/name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="186dp"
+        android:layout_height="23dp"
         android:text="Store Name"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@id/logo"
         app:layout_constraintTop_toTopOf="@id/logo" />
 
-    <!-- Address Label -->
+    <ImageView
+        android:id="@+id/favHeart"
+        android:layout_width="91dp"
+        android:layout_height="52dp"
+        app:layout_constraintBottom_toTopOf="@+id/opening_hours"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_favorite_empty" />
+
     <TextView
         android:id="@+id/address_label"
         android:layout_width="wrap_content"
@@ -41,16 +57,18 @@
         app:layout_constraintTop_toBottomOf="@id/name" />
 
     <!-- Address -->
-    <TextView
-        android:id="@+id/address"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Address"
-        app:layout_constraintStart_toEndOf="@id/address_label"
-        app:layout_constraintTop_toTopOf="@id/address_label"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- Opening Hours Label -->
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="167dp"
+        android:layout_height="wrap_content"
+        android:text="Address"
+        app:layout_constraintEnd_toStartOf="@+id/favHeart"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/address_label"
+        app:layout_constraintTop_toTopOf="@id/address_label" />
+
     <TextView
         android:id="@+id/opening_hours_label"
         android:layout_width="wrap_content"
